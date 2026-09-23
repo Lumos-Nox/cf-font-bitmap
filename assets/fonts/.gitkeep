@@ -1,0 +1,3 @@
+Place .ttf/.ttc/.otf font files here, e.g. NotoSans.ttf (the DEFAULT_FONT
+in src/entry.py). Any file dropped in this folder becomes fetchable via
+?font=<filename> with no code change or redeploy needed for entry.py.
