@@ -3,5 +3,7 @@
 .venv-workers/
 .wrangler/
 python_modules/
+.env*
+.dev.vars*
 __pycache__/
 *.py[cod]
