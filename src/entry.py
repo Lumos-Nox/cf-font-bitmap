@@ -35,10 +35,10 @@ What changed and why:
 
 import io
 import json
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import parse_qs, urlparse
 
-from workers import WorkerEntrypoint, Response
 from PIL import Image, ImageDraw, ImageFont
+from workers import Response, WorkerEntrypoint
 
 FONT_CACHE = {}  # font filename -> bytes, cached per isolate
 DEFAULT_FONT = "SF-Pro.ttf"  # must exist under ./assets/fonts/
@@ -151,7 +151,7 @@ class Default(WorkerEntrypoint):
         try:
             font_bytes = await get_font_bytes(self.env, font_name)
             img = render_text_to_bitmap(text, font_bytes, size)
-        except Exception as e:
+        except (OSError, RuntimeError, ValueError) as e:
             return json_response(400, {"error": str(e)})
 
         packed = pack_1bpp(img)
